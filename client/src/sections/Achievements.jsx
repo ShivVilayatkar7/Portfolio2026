@@ -1,29 +1,27 @@
 import { motion } from "framer-motion";
-
-const achievements = [
-  {
-    number: "2+",
-    title: "Hackathons",
-    description: "Participated in competitive hackathons and collaborative innovation events.",
-  },
-  {
-    number: "7+",
-    title: "Tech Events",
-    description: "Attended technical workshops, seminars, and industry-focused events.",
-  },
-  {
-    number: "2+",
-    title: "Internships",
-    description: "Completed internships in Python Full Stack and MERN Stack development.",
-  },
-  {
-    number: "5+",
-    title: "Major Projects",
-    description: "Built production-ready full stack applications using modern technologies.",
-  },
-];
+import { useEffect, useState } from "react";
+import { getPortfolio } from "../services/api";
 
 const Achievements = () => {
+  const [achievements, setAchievements] =
+    useState([]);
+
+  const fetchPortfolio = async () => {
+    try {
+      const { data } =
+        await getPortfolio();
+
+      setAchievements(
+        data.data?.achievements || []
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPortfolio();
+  }, []);
   return (
     <section id="achievements" className="px-6 py-28 lg:px-10">
       <div className="mx-auto max-w-7xl">

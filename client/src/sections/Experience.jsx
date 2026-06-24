@@ -1,27 +1,28 @@
 import { motion } from "framer-motion";
-
-const experiences = [
-  {
-    year: "2025 - Present",
-    role: "Open to Internship Opportunities",
-    description:
-      "Actively building full-stack applications, strengthening problem-solving skills, and preparing for professional software development roles.",
-  },
-  {
-    year: "2024 - 2025",
-    role: "Full Stack Development Journey",
-    description:
-      "Focused on MERN stack development, modern frontend technologies, backend architecture, and real-world project development.",
-  },
-  {
-    year: "2023 - 2024",
-    role: "Programming Foundations",
-    description:
-      "Built strong fundamentals in Java, Python, C/C++, data structures, algorithms, and software development concepts.",
-  },
-];
+import { useEffect, useState } from "react";
+import { getPortfolio } from "../services/api";
 
 const Experience = () => {
+  const [experiences, setExperiences] =
+    useState([]);
+
+  const fetchPortfolio = async () => {
+    try {
+      const { data } =
+        await getPortfolio();
+
+      setExperiences(
+        data.data?.experience || []
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPortfolio();
+  }, []);
+  
   return (
     <section
       id="experience"

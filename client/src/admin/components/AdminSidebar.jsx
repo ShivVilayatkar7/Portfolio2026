@@ -39,6 +39,13 @@ const AdminSidebar = () => {
           Portfolio
         </Link>
 
+        <Link 
+        to="/admin/messages"
+        className="block text-[#C9C3D4]"
+        >
+          Messages
+        </Link>
+
         <button
           onClick={logout}
           className="mt-8 text-red-400"

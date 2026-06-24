@@ -10,19 +10,30 @@ import {
 const Portfolio = () => {
   const token = localStorage.getItem("token");
 
-  const [formData, setFormData] = useState({
-    about: {
-      title: "",
-      description: "",
-      image: "",
-    },
+const [formData, setFormData] = useState({
+  about: {
+    title: "",
+    paragraph1: "",
+    paragraph2: "",
+    paragraph3: "",
+    image: "",
+  },
 
-    socialLinks: {
-      github: "",
-      linkedin: "",
-      email: "",
-    },
-  });
+  skills: [],
+  experience: [],
+  education: [],
+  achievements: [],
+  certifications: [],
+  resume: {
+    url: "",
+  },
+
+  socialLinks: {
+    github: "",
+    linkedin: "",
+    email: "",
+  },
+});
 
   const fetchPortfolio = async () => {
     try {
@@ -48,6 +59,16 @@ const Portfolio = () => {
         ...formData.about,
         [e.target.name]: e.target.value,
       },
+    });
+  };
+
+  const handleFieldChange = (field, value) => {
+    setFormData({
+      ...formData,
+      [field]: value
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean),
     });
   };
 
@@ -143,6 +164,48 @@ const Portfolio = () => {
               formData.about?.image || ""
             }
             onChange={handleAboutChange}
+            className="w-full rounded-xl bg-[#241537] p-3"
+          />
+
+          <h2 className="pt-8 text-2xl font-bold">
+            Skills
+          </h2>
+
+          <input
+            placeholder="React, Node.js, MongoDB, Express"
+            value={
+              formData.skills
+                ?.map((skill) =>
+                  skill.name || skill
+                )
+                .join(", ") || ""
+            }
+            onChange={(e) =>
+              handleFieldChange(
+                "skills",
+                e.target.value
+              )
+            }
+            className="w-full rounded-xl bg-[#241537] p-3"
+          />
+
+          <h2 className="pt-8 text-2xl font-bold">
+            Experience
+          </h2>
+
+          <textarea
+            placeholder="One experience per line"
+            rows={5}
+            className="w-full rounded-xl bg-[#241537] p-3"
+          />
+
+          <h2 className="pt-8 text-2xl font-bold">
+            Education
+          </h2>
+
+          <textarea
+            placeholder="One education item per line"
+            rows={5}
             className="w-full rounded-xl bg-[#241537] p-3"
           />
 

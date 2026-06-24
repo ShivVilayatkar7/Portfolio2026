@@ -36,26 +36,18 @@ export const getMessages = (token) =>
     },
   });
 
-export const deleteMessage = (
-  id,
-  token
-) =>
+export const deleteMessage = (id, token) =>
   api.delete(`/contact/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 
-export const getPortfolioProjects = () =>
-  api.get("/projects");
+export const getPortfolioProjects = () => api.get("/projects");
 
-export const getPortfolio = () =>
-  api.get("/portfolio");
+export const getPortfolio = () => api.get("/portfolio");
 
-export const updatePortfolio = (
-  portfolio,
-  token
-) =>
+export const updatePortfolio = (portfolio, token) =>
   api.put("/portfolio", portfolio, {
     headers: {
       Authorization: `Bearer ${token}`,

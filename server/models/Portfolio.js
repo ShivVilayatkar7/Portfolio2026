@@ -21,14 +21,15 @@ const portfolioSchema = new mongoose.Schema(
 
     skills: [
       {
-        name: String,
+        category: String,
+        items: [String],
       },
     ],
 
     experience: [
       {
         year: String,
-        title: String,
+        role: String,
         description: String,
       },
     ],
@@ -38,6 +39,7 @@ const portfolioSchema = new mongoose.Schema(
         duration: String,
         degree: String,
         institute: String,
+        subjects: [String],
       },
     ],
 
@@ -50,8 +52,9 @@ const portfolioSchema = new mongoose.Schema(
 
     achievements: [
       {
+        number: String,
         title: String,
-        value: String,
+        description: String,
       },
     ],
 

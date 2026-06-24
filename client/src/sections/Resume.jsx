@@ -1,7 +1,29 @@
 import { motion } from "framer-motion";
 import { FaEye, FaDownload } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { getPortfolio } from "../services/api";
 
 const Resume = () => {
+  const [resumeUrl, setResumeUrl] =
+    useState("");
+
+  const fetchPortfolio = async () => {
+    try {
+      const { data } =
+        await getPortfolio();
+
+      setResumeUrl(
+        data.data?.resume?.url || ""
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPortfolio();
+  }, []);
+
   return (
     <section id="resume" className="px-6 py-28 lg:px-10">
       <div className="mx-auto max-w-7xl">
@@ -33,21 +55,32 @@ const Resume = () => {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <button className="flex items-center gap-2 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] px-6 py-3 font-medium">
+                <a
+                  href={resumeUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] px-6 py-3 font-medium"
+                >
                   <FaEye />
                   View Resume
-                </button>
+                </a>
 
-                <button className="flex items-center gap-2 rounded-full border border-[#8B5CF6]/40 px-6 py-3 font-medium">
+                <a
+                  href={resumeUrl}
+                  download
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 rounded-full border border-[#8B5CF6]/40 px-6 py-3 font-medium"
+                >
                   <FaDownload />
                   Download Resume
-                </button>
+                </a>
               </div>
             </div>
 
             {/* Right */}
             <div className="flex justify-center">
-              <div className="h-[420px] w-[300px] rounded-2xl border border-[#8B5CF6]/20 bg-[#241537] p-6">
+              <div className="h-[420px] max-w-[300px] min-w-[250px] rounded-2xl border border-[#8B5CF6]/20 bg-[#241537] p-6">
                 <div className="mb-4 h-6 w-24 rounded bg-[#8B5CF6]/20"></div>
 
                 <div className="space-y-3">

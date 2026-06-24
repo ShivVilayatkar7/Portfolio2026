@@ -2,18 +2,15 @@ import { useEffect, useState } from "react";
 import { Trash2 } from "lucide-react";
 
 import AdminSidebar from "../components/AdminSidebar";
-
 import {
   getMessages,
   deleteMessage,
 } from "../../services/api";
 
 const Messages = () => {
-  const [messages, setMessages] =
-    useState([]);
+  const [messages, setMessages] = useState([]);
 
-  const token =
-    localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   const fetchMessages = async () => {
     try {
@@ -46,36 +43,41 @@ const Messages = () => {
 
       <div className="flex-1 p-8">
         <h1 className="mb-8 text-4xl font-bold">
-          Messages
+          Contact Messages
         </h1>
 
-        <div className="space-y-4">
-          {messages.map((msg) => (
+        <div className="space-y-6">
+          {messages.map((message) => (
             <div
-              key={msg._id}
-              className="rounded-3xl bg-[#1B102A] p-6"
+              key={message._id}
+              className="rounded-3xl border border-[#8B5CF6]/20 bg-[#1B102A] p-6"
             >
-              <h3 className="text-xl font-bold">
-                {msg.name}
-              </h3>
+              <div className="mb-4 flex items-center justify-between">
+                <div>
+                  <h3 className="text-xl font-bold">
+                    {message.name}
+                  </h3>
 
-              <p className="mb-3 text-purple-400">
-                {msg.email}
+                  <p className="text-[#A78BFA]">
+                    {message.email}
+                  </p>
+                </div>
+
+                <button
+                  onClick={() =>
+                    handleDelete(
+                      message._id
+                    )
+                  }
+                  className="rounded-xl bg-red-500 p-3"
+                >
+                  <Trash2 size={18} />
+                </button>
+              </div>
+
+              <p className="text-[#C9C3D4]">
+                {message.message}
               </p>
-
-              <p className="mb-4">
-                {msg.message}
-              </p>
-
-              <button
-                onClick={() =>
-                  handleDelete(msg._id)
-                }
-                className="flex items-center gap-2 rounded-xl bg-red-500 px-4 py-2"
-              >
-                <Trash2 size={18} />
-                Delete
-              </button>
             </div>
           ))}
         </div>

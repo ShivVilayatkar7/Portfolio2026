@@ -1,30 +1,26 @@
 import { motion } from "framer-motion";
-
-const skillCategories = [
-  {
-    title: "Frontend",
-    skills: ["React", "JavaScript", "Tailwind CSS", "HTML", "CSS"],
-  },
-  {
-    title: "Backend",
-    skills: ["Node.js", "Express.js", "MongoDB"],
-  },
-  {
-    title: "Languages",
-    skills: ["Java", "Python", "C", "C++"],
-  },
-  {
-    title: "Tools",
-    skills: ["Git", "GitHub", "VS Code"],
-  },
-];
+import { useEffect, useState } from "react";
+import { getPortfolio } from "../services/api";
 
 const Skills = () => {
+  const [skillCategories, setSkillCategories] = useState([]);
+
+  const fetchPortfolio = async () => {
+    try {
+      const { data } = await getPortfolio();
+
+      setSkillCategories(data.data?.skills || []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPortfolio();
+  }, []);
+
   return (
-    <section
-      id="skills"
-      className="px-6 py-28 lg:px-10"
-    >
+    <section id="skills" className="px-6 py-28 lg:px-10">
       <div className="mx-auto max-w-7xl">
         <p className="mb-4 text-sm uppercase tracking-[0.3em] text-[#8D859A]">
           Skills & Technologies
@@ -37,7 +33,7 @@ const Skills = () => {
         <div className="grid gap-6 md:grid-cols-2">
           {skillCategories.map((category, index) => (
             <motion.div
-              key={category.title}
+              key={category.category}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -45,11 +41,11 @@ const Skills = () => {
               className="rounded-3xl border border-[#8B5CF6]/20 bg-[#1B102A] p-8"
             >
               <h3 className="heading-font mb-6 text-2xl font-bold text-white">
-                {category.title}
+                {category.category}
               </h3>
 
               <div className="flex flex-wrap gap-3">
-                {category.skills.map((skill) => (
+                {category.items?.map((skill) => (
                   <span
                     key={skill}
                     className="rounded-full border border-[#8B5CF6]/30 bg-[#241537] px-4 py-2 text-[#C9C3D4]"

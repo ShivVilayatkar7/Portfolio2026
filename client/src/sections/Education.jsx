@@ -1,32 +1,28 @@
 import { motion } from "framer-motion";
-
-const educationData = [
-  {
-    degree: "Diploma in Computer Engineering",
-    institute: "Shri Krushnarao Pandav Polytechnic, Nagpur",
-    duration: "2022 - 2025",
-    subjects: [
-      "Python",
-      "Java",
-      "C/C++",
-      "Web Development",
-      "Software Engineering Fundamentals",
-    ],
-  },
-  {
-    degree: "Bachelor of Engineering",
-    institute: "K.D.K. College of Engineering",
-    duration: "2025 - Present",
-    subjects: [
-      "MERN Stack",
-      "Full Stack Development",
-      "Software Engineering",
-      "Real World Project Development",
-    ],
-  },
-];
+import { useEffect, useState } from "react";
+import { getPortfolio } from "../services/api";
 
 const Education = () => {
+  const [educationData, setEducationData] =
+    useState([]);
+
+  const fetchPortfolio = async () => {
+    try {
+      const { data } =
+        await getPortfolio();
+
+      setEducationData(
+        data.data?.education || []
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPortfolio();
+  }, []);
+  
   return (
     <section id="education" className="px-6 py-28 lg:px-10">
       <div className="mx-auto max-w-7xl">

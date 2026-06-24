@@ -1,33 +1,28 @@
 import { motion } from "framer-motion";
-
-const certifications = [
-  {
-    title: "Python Development",
-    issuer: "Professional Certification",
-  },
-  {
-    title: "Java Programming",
-    issuer: "Professional Certification",
-  },
-  {
-    title: "Web Development",
-    issuer: "Professional Certification",
-  },
-  {
-    title: "MERN Stack",
-    issuer: "Technical Certification",
-  },
-  {
-    title: "Internship Certification",
-    issuer: "Industry Experience",
-  },
-  {
-    title: "Hackathon Participation",
-    issuer: "Technical Events",
-  },
-];
+import { useEffect, useState } from "react";
+import { getPortfolio } from "../services/api";
 
 const Certifications = () => {
+  const [certifications, setCertifications] =
+    useState([]);
+
+  const fetchPortfolio = async () => {
+    try {
+      const { data } =
+        await getPortfolio();
+
+      setCertifications(
+        data.data?.certifications || []
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPortfolio();
+  }, []);
+  
   return (
     <section id="certifications" className="px-6 py-28 lg:px-10">
       <div className="mx-auto max-w-7xl">
