@@ -22,7 +22,7 @@ const Footer = () => {
           {/* Right */}
           <div className="flex items-center gap-5">
             <a
-              href="#"
+              href="https://github.com/ShivVilayatkar7"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#C9C3D4] transition hover:text-[#8B5CF6]"
@@ -31,7 +31,7 @@ const Footer = () => {
             </a>
 
             <a
-              href="#"
+              href="https://www.linkedin.com/in/shiv-vilayatkar/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#C9C3D4] transition hover:text-[#8B5CF6]"

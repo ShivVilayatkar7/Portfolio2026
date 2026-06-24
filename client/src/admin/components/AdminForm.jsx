@@ -170,8 +170,7 @@ const AdminForm = ({ onSubmit, editingProject }) => {
           ? "Uploading..."
           : editingProject
             ? "Update Project"
-            : "Add Project"
-        }
+            : "Add Project"}
       </button>
     </form>
   );

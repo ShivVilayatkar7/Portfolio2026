@@ -35,11 +35,11 @@ const Navbar = () => {
         </div>
 
         <div className="hidden items-center gap-5 md:flex">
-          <a href="#">
+          <a href="https://github.com/ShivVilayatkar7" target="_blank">
             <FaGithub size={22} />
           </a>
 
-          <a href="#">
+          <a href="https://www.linkedin.com/in/shiv-vilayatkar/" target="_blank">
             <FaLinkedinIn size={22} />
           </a>
         </div>

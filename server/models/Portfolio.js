@@ -13,7 +13,9 @@ const portfolioSchema = new mongoose.Schema(
     },
 
     hero: {
+      badge: String,
       greeting: String,
+      subtitle: String,
       title: String,
       description: String,
       image: String,

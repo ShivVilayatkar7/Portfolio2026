@@ -62,8 +62,9 @@ const Projects = () => {
       <AdminSidebar />
 
       <div className="flex-1 p-8">
+        <AdminForm onSubmit={handleCreate} editingProject={editingProject} />
+        
         <h1 className="mb-8 text-4xl font-bold">Projects</h1>
-
         <div className="grid gap-6 md:grid-cols-2">
           {projects.map((project) => (
             <div
@@ -77,7 +78,6 @@ const Projects = () => {
               />
 
               <h3 className="mb-2 text-2xl font-bold">{project.title}</h3>
-
               <p className="mb-4 text-[#C9C3D4]">{project.description}</p>
 
               <button
@@ -98,8 +98,6 @@ const Projects = () => {
             </div>
           ))}
         </div>
-
-        <AdminForm onSubmit={handleCreate} editingProject={editingProject} />
       </div>
     </div>
   );

@@ -54,15 +54,6 @@ function App() {
           }
         />
 
-        <Route
-          path="/admin/messages"
-          element={
-            <ProtectedRoute>
-              <Messages />
-            </ProtectedRoute>
-          }
-        />
-
       </Routes>
     </BrowserRouter>
   );
